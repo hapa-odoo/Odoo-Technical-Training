@@ -17,9 +17,8 @@ class EstateProperty(models.Model):
     _order = 'id desc'
     name = fields.Char(default = "Unknown",required = True)
     def _get_discription(self):
-        print(self.env.user.name)
-        # if self.env.context.get('my_property_search'):
-        return self.env.user.name + '\'s property'
+         if self.env.context.get('is_my_property'):
+            return self.env.user.name + 's Property'
     description = fields.Text(default=_get_discription)
     postcode = fields.Char()
     date_availability = fields.Date(default = lambda self: fields.Datetime.now(), copy= False)
@@ -56,9 +55,7 @@ class EstateProperty(models.Model):
         ], default='new')
     
     # currency_id = fields.Many2one('res.currency', default= lambda self : self.env.company.currency_id)
-    def _get_description(self):
-        if self.env.context.get('is_my_property'):
-            return self.env.user.name + 's Property'
+   
     
     
 
@@ -144,10 +141,7 @@ class EstateProperty(models.Model):
             "domain": [('property_id', '=', self.id)]
             }
     
-    # def hide_btn(self):
-    #     for i in self:
-    #         if i.state
-            
+    
 class EstatePropertyTags(models.Model):
     _name = 'estate.property.tags'
     _description = 'estate property tags'

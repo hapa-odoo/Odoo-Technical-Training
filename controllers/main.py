@@ -1,3 +1,4 @@
+from pickle import FALSE
 from odoo import http
 from odoo.http import request
 
@@ -18,9 +19,7 @@ class RealEstate(http.Controller):
         print ("Properties ::: ", properties)
         return request.render('estate.properties_list', { 'user': request.env.user, 'properties': properties })
 
-    # @http.route(['/welcome/<model("property.type"):property Type>', '/course/<string:is_static>'], auth="public", website=True)
-    # def course_details(self, course=False, **kw):
-    #     if course:
-    #         return request.render('open_academy.course_details', {
-    #             'course': course,
-    #         })
+    @http.route(['/hello_template_user/<model("estate.property"):Properties_c>'], auth="public", website=True)
+    def property_details(self,Properties_c=False, **kw):
+       if Properties_c:
+            return request.render('estate.property_details', { 'Property': Properties_c})

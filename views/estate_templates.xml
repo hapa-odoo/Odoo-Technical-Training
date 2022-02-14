@@ -25,7 +25,11 @@
                         <!-- <tr t-att-class="sequence % 2 == 0 and 'o_even' or ''"> -->
                         <tr t-attf-style="font-weight: bold;#{sequence % 2 == 0 and 'background: yellow;' or 'background: blue;'}">
                             <td><t t-out="sequence" /></td>
-                            <td><t t-out="property.name" /></td>
+                            <td>
+                            <a t-attf-href="/hello_template_user/#{property.id}">
+                            <t t-out="property.name" />
+                            </a>
+                            </td>
                             <td>
                                 <t t-if="property.description" t-out="property.description" />
                                 <t t-else="">No Description Available</t>
@@ -47,4 +51,34 @@
             <t t-set="SomeAdditionalData">Hello</t>
         </t>
     </template>
-</odoo>
+    
+    
+    
+    <template id="property_details" name="Property_Details">
+        <div t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <!-- <div t-attf-style="padding-top: 50%; background-image: url(/web/image/course.course/#{property.id}/image_1024); background-size: cover; background-position:center"/> -->
+                        <div>
+                            <div>State of the Property</div>
+                            <div t-field="Property.state"/>
+                        </div>
+                    </div>
+                    <div class="col-8 o_property_details">
+                        <div class="text-center font-weight-bold"><span t-field="Property.name"/></div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+              
+    </template>
+
+    </odoo>
+
+
+
+<!-- <template id="sample_property" name="sample">
+
+</template> -->
+
